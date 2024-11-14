@@ -1,0 +1,59 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TransparentDonationTracker
+    network: mainnet
+    source:
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+      abi: TransparentDonationTracker
+      startBlock: 21187543
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - BadgeEarned
+        - CauseCreated
+        - CauseTargetReached
+        - DonationReceived
+        - FundsWithdrawn
+        - ImpactScoreUpdated
+        - MilestoneAdded
+        - MilestoneCompleted
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: TransparentDonationTracker
+          file: ./abis/TransparentDonationTracker.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BadgeEarned(indexed address,string,uint256)
+          handler: handleBadgeEarned
+        - event: CauseCreated(indexed string,string,address,uint256)
+          handler: handleCauseCreated
+        - event: CauseTargetReached(indexed string,uint256,uint256)
+          handler: handleCauseTargetReached
+        - event: DonationReceived(indexed address,indexed string,uint256,uint256,uint256)
+          handler: handleDonationReceived
+        - event: FundsWithdrawn(indexed string,address,uint256)
+          handler: handleFundsWithdrawn
+        - event: ImpactScoreUpdated(indexed address,uint256,string)
+          handler: handleImpactScoreUpdated
+        - event: MilestoneAdded(indexed string,string,uint256)
+          handler: handleMilestoneAdded
+        - event: MilestoneCompleted(indexed string,uint256,uint256)
+          handler: handleMilestoneCompleted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/transparent-donation-tracker.ts
