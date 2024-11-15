@@ -1,5 +1,5 @@
 import { newMockEvent } from "matchstick-as"
-import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts"
+import { ethereum, Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
 import {
   Approval,
   ApprovalForAll,
@@ -88,6 +88,7 @@ export function createBadgeEarnedEvent(
 }
 
 export function createCauseCreatedEvent(
+  causeId: Bytes,
   causeName: string,
   description: string,
   beneficiary: Address,
@@ -97,6 +98,9 @@ export function createCauseCreatedEvent(
 
   causeCreatedEvent.parameters = new Array()
 
+  causeCreatedEvent.parameters.push(
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
   causeCreatedEvent.parameters.push(
     new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
@@ -123,7 +127,8 @@ export function createCauseCreatedEvent(
 }
 
 export function createCauseTargetReachedEvent(
-  cause: string,
+  causeId: Bytes,
+  causeName: string,
   finalAmount: BigInt,
   donorCount: BigInt
 ): CauseTargetReached {
@@ -132,7 +137,10 @@ export function createCauseTargetReachedEvent(
   causeTargetReachedEvent.parameters = new Array()
 
   causeTargetReachedEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  causeTargetReachedEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
   causeTargetReachedEvent.parameters.push(
     new ethereum.EventParam(
@@ -152,7 +160,8 @@ export function createCauseTargetReachedEvent(
 
 export function createDonationReceivedEvent(
   donor: Address,
-  cause: string,
+  causeId: Bytes,
+  causeName: string,
   amount: BigInt,
   impactScore: BigInt,
   timestamp: BigInt
@@ -165,7 +174,10 @@ export function createDonationReceivedEvent(
     new ethereum.EventParam("donor", ethereum.Value.fromAddress(donor))
   )
   donationReceivedEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  donationReceivedEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
   donationReceivedEvent.parameters.push(
     new ethereum.EventParam("amount", ethereum.Value.fromUnsignedBigInt(amount))
@@ -187,7 +199,8 @@ export function createDonationReceivedEvent(
 }
 
 export function createFundsWithdrawnEvent(
-  cause: string,
+  causeId: Bytes,
+  causeName: string,
   beneficiary: Address,
   amount: BigInt
 ): FundsWithdrawn {
@@ -196,7 +209,10 @@ export function createFundsWithdrawnEvent(
   fundsWithdrawnEvent.parameters = new Array()
 
   fundsWithdrawnEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  fundsWithdrawnEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
   fundsWithdrawnEvent.parameters.push(
     new ethereum.EventParam(
@@ -214,7 +230,8 @@ export function createFundsWithdrawnEvent(
 export function createImpactScoreUpdatedEvent(
   donor: Address,
   newScore: BigInt,
-  cause: string
+  causeId: Bytes,
+  causeName: string
 ): ImpactScoreUpdated {
   let impactScoreUpdatedEvent = changetype<ImpactScoreUpdated>(newMockEvent())
 
@@ -230,14 +247,18 @@ export function createImpactScoreUpdatedEvent(
     )
   )
   impactScoreUpdatedEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  impactScoreUpdatedEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
 
   return impactScoreUpdatedEvent
 }
 
 export function createMilestoneAddedEvent(
-  cause: string,
+  causeId: Bytes,
+  causeName: string,
   description: string,
   targetAmount: BigInt
 ): MilestoneAdded {
@@ -246,7 +267,10 @@ export function createMilestoneAddedEvent(
   milestoneAddedEvent.parameters = new Array()
 
   milestoneAddedEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  milestoneAddedEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
   milestoneAddedEvent.parameters.push(
     new ethereum.EventParam(
@@ -265,7 +289,8 @@ export function createMilestoneAddedEvent(
 }
 
 export function createMilestoneCompletedEvent(
-  cause: string,
+  causeId: Bytes,
+  causeName: string,
   milestoneIndex: BigInt,
   completionTime: BigInt
 ): MilestoneCompleted {
@@ -274,7 +299,10 @@ export function createMilestoneCompletedEvent(
   milestoneCompletedEvent.parameters = new Array()
 
   milestoneCompletedEvent.parameters.push(
-    new ethereum.EventParam("cause", ethereum.Value.fromString(cause))
+    new ethereum.EventParam("causeId", ethereum.Value.fromFixedBytes(causeId))
+  )
+  milestoneCompletedEvent.parameters.push(
+    new ethereum.EventParam("causeName", ethereum.Value.fromString(causeName))
   )
   milestoneCompletedEvent.parameters.push(
     new ethereum.EventParam(

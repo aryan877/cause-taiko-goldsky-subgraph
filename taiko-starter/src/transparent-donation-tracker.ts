@@ -76,6 +76,7 @@ export function handleCauseCreated(event: CauseCreatedEvent): void {
   let entity = new CauseCreated(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
+  entity.causeId = event.params.causeId
   entity.causeName = event.params.causeName
   entity.description = event.params.description
   entity.beneficiary = event.params.beneficiary
@@ -92,7 +93,8 @@ export function handleCauseTargetReached(event: CauseTargetReachedEvent): void {
   let entity = new CauseTargetReached(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
   entity.finalAmount = event.params.finalAmount
   entity.donorCount = event.params.donorCount
 
@@ -108,7 +110,8 @@ export function handleDonationReceived(event: DonationReceivedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.donor = event.params.donor
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
   entity.amount = event.params.amount
   entity.impactScore = event.params.impactScore
   entity.timestamp = event.params.timestamp
@@ -124,7 +127,8 @@ export function handleFundsWithdrawn(event: FundsWithdrawnEvent): void {
   let entity = new FundsWithdrawn(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
   entity.beneficiary = event.params.beneficiary
   entity.amount = event.params.amount
 
@@ -141,7 +145,8 @@ export function handleImpactScoreUpdated(event: ImpactScoreUpdatedEvent): void {
   )
   entity.donor = event.params.donor
   entity.newScore = event.params.newScore
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -154,7 +159,8 @@ export function handleMilestoneAdded(event: MilestoneAddedEvent): void {
   let entity = new MilestoneAdded(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
   entity.description = event.params.description
   entity.targetAmount = event.params.targetAmount
 
@@ -169,7 +175,8 @@ export function handleMilestoneCompleted(event: MilestoneCompletedEvent): void {
   let entity = new MilestoneCompleted(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.cause = event.params.cause
+  entity.causeId = event.params.causeId
+  entity.causeName = event.params.causeName
   entity.milestoneIndex = event.params.milestoneIndex
   entity.completionTime = event.params.completionTime
 

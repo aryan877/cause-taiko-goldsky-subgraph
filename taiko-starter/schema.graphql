@@ -30,6 +30,7 @@ type BadgeEarned @entity(immutable: true) {
 
 type CauseCreated @entity(immutable: true) {
   id: Bytes!
+  causeId: Bytes! # bytes32
   causeName: String! # string
   description: String! # string
   beneficiary: Bytes! # address
@@ -41,7 +42,8 @@ type CauseCreated @entity(immutable: true) {
 
 type CauseTargetReached @entity(immutable: true) {
   id: Bytes!
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   finalAmount: BigInt! # uint256
   donorCount: BigInt! # uint256
   blockNumber: BigInt!
@@ -52,7 +54,8 @@ type CauseTargetReached @entity(immutable: true) {
 type DonationReceived @entity(immutable: true) {
   id: Bytes!
   donor: Bytes! # address
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   amount: BigInt! # uint256
   impactScore: BigInt! # uint256
   timestamp: BigInt! # uint256
@@ -63,7 +66,8 @@ type DonationReceived @entity(immutable: true) {
 
 type FundsWithdrawn @entity(immutable: true) {
   id: Bytes!
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   beneficiary: Bytes! # address
   amount: BigInt! # uint256
   blockNumber: BigInt!
@@ -75,7 +79,8 @@ type ImpactScoreUpdated @entity(immutable: true) {
   id: Bytes!
   donor: Bytes! # address
   newScore: BigInt! # uint256
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -83,7 +88,8 @@ type ImpactScoreUpdated @entity(immutable: true) {
 
 type MilestoneAdded @entity(immutable: true) {
   id: Bytes!
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   description: String! # string
   targetAmount: BigInt! # uint256
   blockNumber: BigInt!
@@ -93,7 +99,8 @@ type MilestoneAdded @entity(immutable: true) {
 
 type MilestoneCompleted @entity(immutable: true) {
   id: Bytes!
-  cause: String! # string
+  causeId: Bytes! # bytes32
+  causeName: String! # string
   milestoneIndex: BigInt! # uint256
   completionTime: BigInt! # uint256
   blockNumber: BigInt!

@@ -166,6 +166,12 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
         "name": "causeName",
@@ -197,9 +203,15 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       },
       {
@@ -228,9 +240,15 @@
         "type": "address"
       },
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       },
       {
@@ -259,9 +277,15 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       },
       {
@@ -296,9 +320,15 @@
         "type": "uint256"
       },
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       }
     ],
@@ -309,9 +339,15 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       },
       {
@@ -334,9 +370,15 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "causeId",
+        "type": "bytes32"
+      },
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "cause",
+        "name": "causeName",
         "type": "string"
       },
       {
@@ -429,7 +471,7 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "cause", "type": "string" },
+      { "internalType": "string", "name": "causeName", "type": "string" },
       { "internalType": "string", "name": "description", "type": "string" },
       { "internalType": "uint256", "name": "targetAmount", "type": "uint256" }
     ],
@@ -459,7 +501,7 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "", "type": "string" },
+      { "internalType": "bytes32", "name": "", "type": "bytes32" },
       { "internalType": "address", "name": "", "type": "address" }
     ],
     "name": "causeDonorAmount",
@@ -469,7 +511,7 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "", "type": "string" },
+      { "internalType": "bytes32", "name": "", "type": "bytes32" },
       { "internalType": "uint256", "name": "", "type": "uint256" }
     ],
     "name": "causeMilestones",
@@ -484,8 +526,16 @@
   },
   {
     "inputs": [{ "internalType": "string", "name": "", "type": "string" }],
-    "name": "causes",
+    "name": "causeNameToId",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "causesById",
     "outputs": [
+      { "internalType": "bytes32", "name": "id", "type": "bytes32" },
       { "internalType": "string", "name": "name", "type": "string" },
       { "internalType": "string", "name": "description", "type": "string" },
       {
@@ -519,7 +569,9 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "string", "name": "cause", "type": "string" }],
+    "inputs": [
+      { "internalType": "string", "name": "causeName", "type": "string" }
+    ],
     "name": "donate",
     "outputs": [],
     "stateMutability": "payable",
@@ -535,7 +587,8 @@
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
       { "internalType": "address", "name": "donor", "type": "address" },
       { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-      { "internalType": "string", "name": "cause", "type": "string" },
+      { "internalType": "bytes32", "name": "causeId", "type": "bytes32" },
+      { "internalType": "string", "name": "causeName", "type": "string" },
       { "internalType": "uint256", "name": "impactScore", "type": "uint256" }
     ],
     "stateMutability": "view",
@@ -558,7 +611,9 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "string", "name": "cause", "type": "string" }],
+    "inputs": [
+      { "internalType": "string", "name": "causeName", "type": "string" }
+    ],
     "name": "getCauseMilestones",
     "outputs": [
       {
@@ -595,7 +650,8 @@
           { "internalType": "uint256", "name": "amount", "type": "uint256" },
           { "internalType": "address", "name": "donor", "type": "address" },
           { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-          { "internalType": "string", "name": "cause", "type": "string" },
+          { "internalType": "bytes32", "name": "causeId", "type": "bytes32" },
+          { "internalType": "string", "name": "causeName", "type": "string" },
           {
             "internalType": "uint256",
             "name": "impactScore",
@@ -799,7 +855,9 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "string", "name": "cause", "type": "string" }],
+    "inputs": [
+      { "internalType": "string", "name": "causeName", "type": "string" }
+    ],
     "name": "withdrawFunds",
     "outputs": [],
     "stateMutability": "nonpayable",
