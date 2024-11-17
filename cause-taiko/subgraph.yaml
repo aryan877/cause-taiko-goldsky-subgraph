@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: TransparentDonationTracker
-    network: mainnet
+    network: taiko-hekla-testnet
     source:
       address: "0xEF8594BAA7697BfD0bC5A9a721ADf73c4487b96c"
       abi: TransparentDonationTracker
